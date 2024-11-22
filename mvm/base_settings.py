@@ -182,7 +182,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
-locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+try:
+    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+except locale.Error:
+    locale.setlocale(locale.LC_TIME, 'C')
 
 
 LANGUAGE_CODE = 'es'
