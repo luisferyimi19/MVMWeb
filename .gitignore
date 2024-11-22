@@ -1,0 +1,19 @@
+# Ignorar configuraciones de PyCharm
+.idea/
+
+# Ignorar archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Ignorar archivos de bases de datos locales
+db.sqlite3
+
+# Ignorar entornos virtuales
+venv/
+env/
+
+# Ignorar configuraciones del sistema operativo
+.DS_Store
+Thumbs.db
