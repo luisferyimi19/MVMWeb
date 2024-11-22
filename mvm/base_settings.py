@@ -16,7 +16,6 @@ import os, certifi
 from pathlib import Path
 
 import django_heroku
-import dj_database_url
 
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
