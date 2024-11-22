@@ -15,8 +15,6 @@ import locale
 import os, certifi
 from pathlib import Path
 
-import django_heroku
-
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
@@ -182,10 +180,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
-try:
-    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
-except locale.Error:
-    locale.setlocale(locale.LC_TIME, 'C')
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 
 LANGUAGE_CODE = 'es'
@@ -204,15 +199,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-django_heroku.settings(locals())
+
+STATIC_ROOT = Path(BASE_DIR / "static_root")
 
 # Media
 
