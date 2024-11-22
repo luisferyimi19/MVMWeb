@@ -141,6 +141,17 @@ ASGI_APPLICATION = "mvm.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+POOL_OPTIONS = {
+    # Keep the pool size low
+    "POOL_SIZE": 15,
+    # Allow it to grow up to 5x if required
+    "MAX_OVERFLOW": 75,
+    # Fail fast, we don't want the user to wait > 30s just to return an error
+    "TIMEOUT": 2,
+    "RECYCLE": 600,
+    "IDLE_TIMEOUT": 300,
+}
+
 DATABASES = {
     "default": {
         "ENGINE": "dj_db_conn_pool.backends.postgresql",
@@ -149,6 +160,7 @@ DATABASES = {
         "PASSWORD": str(SECRETS["MVM_APP_DATABASES_DEFAULT_PASSWORD"]),
         "HOST": str(SECRETS["MVM_APP_DATABASES_DEFAULT_HOST"]),
         "PORT": str(SECRETS["MVM_APP_DATABASES_DEFAULT_PORT"]),
+        "POOL_OPTIONS": POOL_OPTIONS,
     }
 }
 
@@ -232,3 +244,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = str(SECRETS["MVM_APP_FROM_EMAIL"])
 EMAIL_HOST_PASSWORD = str(SECRETS["MVM_APP_EMAIL_PASSWORD"])
 EMAIL_SSL_NO_VERIFY = True
+SECURE_SSL_REDIRECT = True
