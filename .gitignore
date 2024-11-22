@@ -3,6 +3,7 @@
 
 # Ignorar archivos de Python
 __pycache__/
+mvm/__pycache__/
 *.pyc
 *.pyo
 *.log

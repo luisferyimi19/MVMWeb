@@ -76,4 +76,4 @@ urlpatterns += (
 
 admin.site.index_title = "Bienvenidos a Mujeres Viajeras por el Mundo - Portal"
 
-handler404 = "travel.views.no_found_handle"
+handler404 = "apps.travel.views.no_found_handle"
