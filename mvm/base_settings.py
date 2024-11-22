@@ -16,6 +16,7 @@ import os, certifi
 from pathlib import Path
 
 import django_heroku
+import dj_database_url
 
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
@@ -205,7 +206,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -231,8 +232,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = str(SECRETS["MVM_APP_FROM_EMAIL"])
 EMAIL_HOST_PASSWORD = str(SECRETS["MVM_APP_EMAIL_PASSWORD"])
 EMAIL_SSL_NO_VERIFY = True
-
-# Update database configuration with $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
