@@ -53,7 +53,7 @@ else:
             "MVM_APP_SECRET_KEY": "",
             "MVM_APP_ALLOWED_HOSTS": [],
             "MVM_APP_CSRF_TRUSTED_ORIGINS": [],
-            "MVM_APP_DEBUG": True,
+            "MVM_APP_DEBUG": False,
             "MVM_APP_DATABASES_DEFAULT_NAME": "",
             "MVM_APP_DATABASES_DEFAULT_USER": "",
             "MVM_APP_DATABASES_DEFAULT_PASSWORD": "",
