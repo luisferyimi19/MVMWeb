@@ -74,8 +74,8 @@ class OverView(View):
         portal_data = get_portal_with_social_media_data()
         data = {
             "travels": list(travels_data),
-            "portal": portal_data["portal"],
-            "social_media_accounts": portal_data["social_media_accounts"],
+            "portal": portal_data.get("portal"),
+            "social_media_accounts": portal_data.get("social_media_accounts"),
             "reviews": list(reviews_data)
         }
         return render(request, "travel/overview.html", data)
@@ -91,8 +91,8 @@ class TravelView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         data = get_portal_with_social_media_data()
-        context["portal"] = data["portal"]
-        context["social_media_accounts"] = data["social_media_accounts"]
+        context["portal"] = data.get("portal")
+        context["social_media_accounts"] = data.get("social_media_accounts")
         return context
 
     def get_queryset(self):
@@ -266,8 +266,8 @@ class GalleryView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         data = get_portal_with_social_media_data()
-        context["portal"] = data["portal"]
-        context["social_media_accounts"] = data["social_media_accounts"]
+        context["portal"] = data.get("portal")
+        context["social_media_accounts"] = data.get("social_media_accounts")
         return context
 
     def get_queryset(self):
@@ -459,8 +459,11 @@ class WhatsappGeneralView(View):
         # Construct the message for WhatsApp
         message = "Hola, ¿Quisiera información de sus próximos viajes?"
 
+        # Get portal info
+        portal = get_portal_data()
+
         # Construct the WhatsApp URL with the encoded message
-        url_whatsapp = f"https://wa.me/50233570444?text={quote_plus(message)}"
+        url_whatsapp = f"https://wa.me/502{portal.mobile_phone}?text={quote_plus(message)}"
 
         # Redirect the user to WhatsApp
         return HttpResponseRedirect(url_whatsapp)
@@ -474,8 +477,8 @@ class ContactView(View):
     def get(self, request, *args, **kwargs):
         portal_data = get_portal_with_social_media_data()
         data = {
-            "portal": portal_data["portal"],
-            "social_media_accounts": portal_data["social_media_accounts"],
+            "portal": portal_data.get("portal"),
+            "social_media_accounts": portal_data.get("social_media_accounts"),
         }
         return render(request, "contact.html", data)
 

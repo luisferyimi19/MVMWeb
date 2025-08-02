@@ -9,6 +9,8 @@ def get_portal_data():
 
 def get_portal_with_social_media_data():
     portal = get_portal_data()
+    if not portal:
+        return {}
     social_media_accounts = list(portal.social_media_accounts.values("name", "url"))
     data = {
         "portal": {

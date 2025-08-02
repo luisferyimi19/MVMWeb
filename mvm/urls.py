@@ -66,7 +66,7 @@ urlpatterns += (
                 namespace="travels",
             ),
         ),
-        path("admin/", admin.site.urls, name="admin"),
+        path("admin-mvm/", admin.site.urls, name="admin-mvm"),
         path("__reload__/", include("django_browser_reload.urls")),
 
     ]
