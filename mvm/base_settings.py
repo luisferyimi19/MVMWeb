@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
 ]
 
@@ -99,7 +100,6 @@ INSTALLED_APPS_THIRD_PARTY = [
     "spectrum",
     "django_better_admin_arrayfield",
     "django_jsonform",
-    "whitenoise.runserver_nostatic",
 ]
 
 INSTALLED_APPS += INSTALLED_APPS_MVM + INSTALLED_APPS_THIRD_PARTY
@@ -236,11 +236,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = str(SECRETS["MVM_APP_FROM_EMAIL"])
-EMAIL_HOST_PASSWORD = str(SECRETS["MVM_APP_EMAIL_PASSWORD"])
-EMAIL_SSL_NO_VERIFY = True
-SECURE_SSL_REDIRECT = True
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    SECURE_SSL_REDIRECT = False
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = str(SECRETS.get("MVM_APP_FROM_EMAIL", ""))
+    EMAIL_HOST_PASSWORD = str(SECRETS.get("MVM_APP_EMAIL_PASSWORD", ""))
+    SECURE_SSL_REDIRECT = True
