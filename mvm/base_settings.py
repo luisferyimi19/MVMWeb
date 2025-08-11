@@ -69,7 +69,7 @@ else:
 SECRET_KEY = SECRETS["MVM_APP_SECRET_KEY"]
 
 # SECURITY WARNING: don"t run with debug turned on in production!
-DEBUG = False
+DEBUG = SECRETS["MVM_APP_DEBUG"]
 
 ALLOWED_HOSTS = SECRETS["MVM_APP_ALLOWED_HOSTS"]
 
@@ -223,7 +223,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 django_heroku.settings(locals())
 
 # Media
