@@ -69,7 +69,7 @@ else:
 SECRET_KEY = SECRETS["MVM_APP_SECRET_KEY"]
 
 # SECURITY WARNING: don"t run with debug turned on in production!
-DEBUG = SECRETS["MVM_APP_DEBUG"]
+DEBUG = False
 
 ALLOWED_HOSTS = SECRETS["MVM_APP_ALLOWED_HOSTS"]
 
